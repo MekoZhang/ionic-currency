@@ -17,7 +17,29 @@ $dark:                            #444 !default;
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
+$kbBgColor: #343434 !default;
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
+
+.kb {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  z-index: 1000;
+  .row {
+    .button {
+      color: invert($kbBgColor);
+      background-color: $kbBgColor;
+      border-color: lighten($kbBgColor, 5%);
+      font-size: 21px;
+      border-radius: 0;
+      padding: 8px;
+    }
+    .button.activated {
+      background-color: darken($kbBgColor, 10%);
+    }
+    padding: 0;
+  }
+}
 
