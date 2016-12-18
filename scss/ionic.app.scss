@@ -18,28 +18,131 @@ $dark:                            #444 !default;
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 $kbBgColor: #343434 !default;
+$item-default-border: #E8E8E8;
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
-.kb {
-  width: 100%;
-  position: fixed;
-  bottom: 0;
-  z-index: 1000;
-  .row {
-    .button {
-      color: invert($kbBgColor);
-      background-color: $kbBgColor;
-      border-color: lighten($kbBgColor, 5%);
-      font-size: 21px;
+.main {
+  display: flex;
+  flex-direction: column;
+  .display {
+    flex: 1;
+    .item-avatar img {
+      -webkit-border-radius: 0;
+      -moz-border-radius: 0;
       border-radius: 0;
-      padding: 8px;
     }
-    .button.activated {
-      background-color: darken($kbBgColor, 10%);
+    .push-right-top {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      color: #8c8c8c;
+      font-size: 13px;
     }
-    padding: 0;
+    .push-right-bottom {
+      position: absolute;
+      right: 10px;
+      bottom: 20px;
+      font-size: 21px;
+    }
+  }
+  .kb {
+    .row {
+      .button {
+        color: #ffffff;
+        background-color: $kbBgColor;
+        border-color: lighten($kbBgColor, 5%);
+        font-size: 21px;
+        border-radius: 0;
+        padding: 6px;
+      }
+      .button.activated {
+        background-color: darken($kbBgColor, 10%);
+      }
+      padding: 0;
+    }
   }
 }
 
+.ec-list .list {
+  width: 90%;
+  margin-left: 10px;
+  margin-right: auto;
+  margin-top: -1px;
+  .ec-item {
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    padding-left: 0;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    .currency-pic {
+      color: white;
+      height: 36px;
+      width: 36px;
+      line-height: 36px;
+      float: left;
+      font-size: 28px;
+      text-align: center;
+    }
+    h2 {
+      padding-left: 10px;
+      position: absolute;
+      margin: auto !important;
+      top: 0;
+      bottom: 0;
+      left: 36px;
+      height: 32px;
+      line-height: 32px;
+    }
+  }
+}
+
+.currency-item {
+  padding: 0 !important;
+}
+
+.currency-pic img {
+  width: 36px;
+  height: 36px;
+}
+
+.currency-index-bar {
+  background-color: $item-default-border;
+  padding-left: 10px;
+  height: 20px;
+  line-height: 20px;
+  font-size: 80%;
+  color: #545454;
+}
+
+.currency-right-bar {
+  position: fixed;
+  right: 0;
+  width: 20px;
+  height: 464px;
+  z-index: 2;
+  text-align: center;
+  font-size: 80%;
+  color: #545454;
+  div {
+    height: 16px;
+  }
+}
+
+.currency-middle-bar {
+  position: fixed;
+  margin: auto;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  height: 60px;
+  width: 60px;
+  line-height: 60px;
+  text-align: center;
+  color: #ffffff;
+  font-size: 300%;
+  background-color: rgba(0, 0, 0, .5);
+}

@@ -1,4 +1,13 @@
 {
-  "name": "currency",
-  "app_id": ""
+  "name": "极简汇率",
+  "app_id": "",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*",
+    "!www/**/*.map"
+  ]
 }

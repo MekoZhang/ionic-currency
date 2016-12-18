@@ -1,0 +1,108 @@
+<ion-header-bar align-title="center" class="bar-light">
+    <button class="button button-icon icon ion-ios-arrow-thin-left" ng-click="back()"></button>
+    <div class="title">切换货币</div>
+    <button class="button button-icon icon ion-ios-search" ng-click="search()"></button>
+</ion-header-bar>
+<ion-view>
+    <ion-content on-swipe-right="onSwipeRight()">
+        <ion-list>
+            <ion-item class="currency-item">
+                <div class="currency-index-bar">A</div>
+                <ion-list class="ec-list">
+                    <ion-item class="ec-item">
+                        <div class="currency-pic">
+                            <img src="img/currency/CNY.png">
+                        </div>
+                        <h2>人民币 CNY</h2>
+                    </ion-item>
+                    <ion-item class="ec-item">
+                        <div class="currency-pic">
+                            <img src="img/currency/USD.png">
+                        </div>
+                        <h2>美元 USD</h2>
+                    </ion-item>
+                    <ion-item class="ec-item">
+                        <div class="currency-pic">
+                            <img src="img/currency/CNY.png">
+                        </div>
+                        <h2>人民币 CNY</h2>
+                    </ion-item>
+                </ion-list>
+            </ion-item>
+            <ion-item class="currency-item">
+                <div class="currency-index-bar">B</div>
+                <ion-list class="ec-list">
+                    <ion-item class="ec-item">
+                        <div class="currency-pic">
+                            <img src="img/currency/CNY.png">
+                        </div>
+                        <h2>人民币 CNY</h2>
+                    </ion-item>
+                    <ion-item class="ec-item">
+                        <div class="currency-pic">
+                            <img src="img/currency/CNY.png">
+                        </div>
+                        <h2>人民币 CNY</h2>
+                    </ion-item>
+                    <ion-item class="ec-item">
+                        <div class="currency-pic">
+                            <img src="img/currency/CNY.png">
+                        </div>
+                        <h2>人民币 CNY</h2>
+                    </ion-item>
+                </ion-list>
+            </ion-item>
+            <ion-item class="currency-item">
+                <div class="currency-index-bar">C</div>
+                <ion-list class="ec-list">
+                    <ion-item class="ec-item">
+                        <div class="currency-pic">
+                            <img src="img/currency/CNY.png">
+                        </div>
+                        <h2>人民币 CNY</h2>
+                    </ion-item>
+                    <ion-item class="ec-item">
+                        <div class="currency-pic">
+                            <img src="img/currency/CNY.png">
+                        </div>
+                        <h2>人民币 CNY</h2>
+                    </ion-item>
+                </ion-list>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+    <div class="currency-right-bar" ec-position-middle on-drag="right_bar_swipe($event)">
+        <div>&uarr;</div>
+        <div>☆</div>
+        <div>A</div>
+        <div>B</div>
+        <div>C</div>
+        <div>D</div>
+        <div>E</div>
+        <div>F</div>
+        <div>G</div>
+        <div>H</div>
+        <div>I</div>
+        <div>J</div>
+        <div>K</div>
+        <div>L</div>
+        <div>M</div>
+        <div>N</div>
+        <div>O</div>
+        <div>P</div>
+        <div>Q</div>
+        <div>R</div>
+        <div>S</div>
+        <div>T</div>
+        <div>U</div>
+        <div>V</div>
+        <div>W</div>
+        <div>X</div>
+        <div>Y</div>
+        <div>Z</div>
+        <div>#</div>
+    </div>
+    <div class="currency-middle-bar">
+        A
+    </div>
+</ion-view>
