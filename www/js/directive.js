@@ -4,8 +4,9 @@ angular.module('starter.directives', [])
         return {
             link: function (scope, iElm) {
                 var height = $window.innerHeight - 44 - 49 - iElm[0].offsetHeight;
+                console.log(height);
                 if (height >= 0) {
-                    iElm[0].style.top = (height / 2 + 44) + 'px';
+                    iElm[0].style.top = (height + 44) + 'px';
                 } else {
                     iElm[0].style.top = 44 + 'px';
                 }

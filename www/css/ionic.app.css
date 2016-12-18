@@ -9815,6 +9815,24 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+@keyframes blink {
+  0%, 100% {
+    border-right: 1px solid #387ef5; }
+  50% {
+    border-right: 1px solid transparent; } }
+
+@-o-keyframes o-blink {
+  0%, 100% {
+    border-right: 1px solid #387ef5; }
+  50% {
+    border-right: 1px solid transparent; } }
+
+@-webkit-keyframes webkit-blink {
+  0%, 100% {
+    border-right: 1px solid #387ef5; }
+  50% {
+    border-right: 1px solid transparent; } }
+
 .main {
   display: flex;
   flex-direction: column; }
@@ -9829,12 +9847,26 @@ a.button {
       right: 10px;
       top: 10px;
       color: #8c8c8c;
-      font-size: 13px; }
+      font-size: 13px;
+      border-right: 1px solid transparent; }
     .main .display .push-right-bottom {
       position: absolute;
       right: 10px;
       bottom: 20px;
-      font-size: 21px; }
+      font-size: 21px;
+      border-right: 1px solid transparent; }
+    .main .display .item-avatar.selected {
+      background-color: #d9d9d9; }
+      .main .display .item-avatar.selected .item-content {
+        background-color: #d9d9d9; }
+    .main .display .item.selected .push-right-top {
+      animation: blink 1s infinite steps(1, start);
+      -webkit-animation: webkit-blink 1s infinite steps(1, start);
+      -o-animation: o-blink 1s infinite steps(1, start); }
+    .main .display .item.selected .push-right-bottom.activated {
+      animation: blink 1s infinite steps(1, start);
+      -webkit-animation: webkit-blink 1s infinite steps(1, start);
+      -o-animation: o-blink 1s infinite steps(1, start); }
   .main .kb .row {
     padding: 0; }
     .main .kb .row .button {

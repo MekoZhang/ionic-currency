@@ -19,8 +19,15 @@ angular.module('starter.controllers', [])
             $scope.$broadcast('scroll.refreshComplete');
         };
 
+        $scope.selectItem = function (item) {
+            angular.forEach($scope.items, function (i) {
+                i.selected = false;
+            });
+            item.selected = true;
+        };
+
         $scope.items = [
-            {id: 'CNY', name: '人民币', symbol: '¥'},
+            {id: 'CNY', name: '人民币', symbol: '¥', selected: true},
             {id: 'USD', name: '美元', symbol: '$'},
             {id: 'USD', name: '美元', symbol: '$'},
             {id: 'USD', name: '美元', symbol: '$'},
@@ -29,23 +36,52 @@ angular.module('starter.controllers', [])
             {id: 'EUR', name: '欧元', symbol: '€'}
         ];
     })
-    .controller('SwapCtrl', function ($scope, $state) {
-        $scope.onSwipeRight = function() {
+    .controller('SwapCtrl', function ($rootScope, $scope, $state, $timeout, $location, $ionicScrollDelegate, $ionicViewSwitcher, currencyService) {
+
+        $scope.targetText = '';
+        $scope.currencyList = currencyService.getGroupCurrency();
+        $scope.hotCurrencyList = currencyService.getHotCurrency();
+
+        $scope.onSwipeRight = function () {
             $state.go("main");
         };
         $scope.back = function () {
             $state.go("main");
         };
         $scope.search = function () {
+            $ionicViewSwitcher.nextDirection('enter');
             $state.go("search");
         };
-        $scope.right_bar_swipe = function (e) {
-            console.log(e);
+        $scope.itemClick = function (item) {
+            console.log(item);
+        };
+        $scope.right_bar_touch = function (e) {
+            var text = e.target.innerText;
+            $scope.targetText = text;
+            if (text == '☆') {
+                $ionicScrollDelegate.scrollTop();
+            } else if (text == '#') {
+                $ionicScrollDelegate.scrollBottom();
+            } else {
+                $location.hash('item' + text);
+                $ionicScrollDelegate.anchorScroll();
+            }
+            $timeout(function () {
+                $scope.targetText = '';
+            }, 1000);
         }
     })
-    .controller('SearchCtrl', function ($scope, $state) {
+    .controller('SearchCtrl', function ($scope, $state, $ionicViewSwitcher, currencyService) {
+        $scope.searchText = "";
+        $scope.currencyList = currencyService.getAllCurrency();
+
         $scope.cancel = function () {
-            $state.go("main");
+            $ionicViewSwitcher.nextDirection('exit');
+            $state.go("swap");
         };
+
+        $scope.itemClick = function (item) {
+            console.log(item);
+        }
     })
 ;

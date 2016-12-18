@@ -1,11 +1,22 @@
 <ion-header-bar class="item-input-inset">
     <label class="item-input-wrapper">
         <i class="icon ion-ios-search placeholder-icon"></i>
-        <input type="search" placeholder="搜索货币名称或国家">
+        <input type="search" ng-model="searchText" placeholder="搜索货币名称或国家">
     </label>
     <button class="button button-clear button-dark" ng-click="cancel()">
         取消
     </button>
 </ion-header-bar>
 <ion-view>
+    <ion-content>
+        <ion-list class="ec-list" ng-if="!!searchText">
+            <ion-item class="ec-item" ng-click="itemClick(item)"
+                      ng-repeat="item in currencyList | filter:{$: searchText} | orderBy: 'currency_name_Pinyin'">
+                <div class="currency-pic">
+                    <img ng-src="img/currency/{{item.symbol}}.png">
+                </div>
+                <h2 ng-bind="item['currency_name_zh-Hans'] + ' ' + item.symbol"></h2>
+            </ion-item>
+        </ion-list>
+    </ion-content>
 </ion-view>

@@ -6,103 +6,35 @@
 <ion-view>
     <ion-content on-swipe-right="onSwipeRight()">
         <ion-list>
-            <ion-item class="currency-item">
-                <div class="currency-index-bar">A</div>
+            <ion-item class="currency-item" id="itemHot">
+                <div class="currency-index-bar">热门</div>
                 <ion-list class="ec-list">
-                    <ion-item class="ec-item">
+                    <ion-item class="ec-item" ng-repeat="item in hotCurrencyList | orderBy: 'currency_name_Pinyin'" ng-click="itemClick(item)">
                         <div class="currency-pic">
-                            <img src="img/currency/CNY.png">
+                            <img ng-src="img/currency/{{item.symbol}}.png">
                         </div>
-                        <h2>人民币 CNY</h2>
-                    </ion-item>
-                    <ion-item class="ec-item">
-                        <div class="currency-pic">
-                            <img src="img/currency/USD.png">
-                        </div>
-                        <h2>美元 USD</h2>
-                    </ion-item>
-                    <ion-item class="ec-item">
-                        <div class="currency-pic">
-                            <img src="img/currency/CNY.png">
-                        </div>
-                        <h2>人民币 CNY</h2>
+                        <h2 ng-bind="item['currency_name_zh-Hans'] + ' ' + item.symbol"></h2>
                     </ion-item>
                 </ion-list>
             </ion-item>
-            <ion-item class="currency-item">
-                <div class="currency-index-bar">B</div>
+            <ion-item class="currency-item" ng-repeat="(key,value) in currencyList" id="item{{key | uppercase}}">
+                <div class="currency-index-bar" ng-bind="key | uppercase"></div>
                 <ion-list class="ec-list">
-                    <ion-item class="ec-item">
+                    <ion-item class="ec-item" ng-repeat="item in value" ng-click="itemClick(item)">
                         <div class="currency-pic">
-                            <img src="img/currency/CNY.png">
+                            <img ng-src="img/currency/{{item.symbol}}.png">
                         </div>
-                        <h2>人民币 CNY</h2>
-                    </ion-item>
-                    <ion-item class="ec-item">
-                        <div class="currency-pic">
-                            <img src="img/currency/CNY.png">
-                        </div>
-                        <h2>人民币 CNY</h2>
-                    </ion-item>
-                    <ion-item class="ec-item">
-                        <div class="currency-pic">
-                            <img src="img/currency/CNY.png">
-                        </div>
-                        <h2>人民币 CNY</h2>
-                    </ion-item>
-                </ion-list>
-            </ion-item>
-            <ion-item class="currency-item">
-                <div class="currency-index-bar">C</div>
-                <ion-list class="ec-list">
-                    <ion-item class="ec-item">
-                        <div class="currency-pic">
-                            <img src="img/currency/CNY.png">
-                        </div>
-                        <h2>人民币 CNY</h2>
-                    </ion-item>
-                    <ion-item class="ec-item">
-                        <div class="currency-pic">
-                            <img src="img/currency/CNY.png">
-                        </div>
-                        <h2>人民币 CNY</h2>
+                        <h2 ng-bind="item['currency_name_zh-Hans'] + ' ' + item.symbol"></h2>
                     </ion-item>
                 </ion-list>
             </ion-item>
         </ion-list>
     </ion-content>
-    <div class="currency-right-bar" ec-position-middle on-drag="right_bar_swipe($event)">
-        <div>&uarr;</div>
+    <div class="currency-right-bar" ec-position-middle on-touch="right_bar_touch($event)">
         <div>☆</div>
-        <div>A</div>
-        <div>B</div>
-        <div>C</div>
-        <div>D</div>
-        <div>E</div>
-        <div>F</div>
-        <div>G</div>
-        <div>H</div>
-        <div>I</div>
-        <div>J</div>
-        <div>K</div>
-        <div>L</div>
-        <div>M</div>
-        <div>N</div>
-        <div>O</div>
-        <div>P</div>
-        <div>Q</div>
-        <div>R</div>
-        <div>S</div>
-        <div>T</div>
-        <div>U</div>
-        <div>V</div>
-        <div>W</div>
-        <div>X</div>
-        <div>Y</div>
-        <div>Z</div>
+        <div ng-repeat="(key,value) in currencyList" ng-bind="key | uppercase"></div>
         <div>#</div>
     </div>
-    <div class="currency-middle-bar">
-        A
+    <div class="currency-middle-bar" ng-if="!!targetText" ng-bind="targetText">
     </div>
 </ion-view>
