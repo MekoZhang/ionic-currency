@@ -6,55 +6,51 @@
         <ion-scroll class="display">
             <ion-refresher pulling-text="下拉添加" pulling-icon="ion-ios-infinite" on-refresh="doAdd()"></ion-refresher>
             <ion-list>
-                <ion-item ng-repeat="item in currencyList" class="item-avatar" ng-class="item.selected?'selected':''"
+                <ion-item ng-repeat="item in currencyList" class="item-avatar"
+                          ng-class="item.selected ? 'selected' : ''"
                           ng-click="selectItem(item)">
                     <img ng-src="img/currency/{{item.symbol}}.png">
                     <h2 ng-bind="item.symbol"></h2>
-                    <span class="push-right-top" ng-bind="input"></span>
-                    <span class="push-right-bottom activated" ng-bind="input"></span>
+                    <span class="push-right-top" ng-if="showOperation && item.selected" ng-bind="display"></span>
+                    <span class="push-right-center" ng-class="!showOperation ? 'activated' : ''" ng-bind="item.value || '0'"></span>
+                    <span class="push-right-bottom" ng-bind="item['currency_name_zh-Hans'] + ' ' + item.sign"></span>
                     <ion-option-button class="button-assertive ion-ios-trash"
-                                       ng-click="remove(item)">
-                    </ion-option-button>
+                                       ng-click="remove(item)"></ion-option-button>
                     <ion-option-button class="button-positive ion-arrow-swap"
-                                       ng-click="swap(item)">
-                    </ion-option-button>
+                                       ng-click="swap(item)"></ion-option-button>
                 </ion-item>
             </ion-list>
         </ion-scroll>
         <div class="kb">
             <div class="row">
-                <button class="button col" ng-click="reset()">AC</button>
+                <button class="button col" ng-click="clear()">AC</button>
                 <button class="button col" ng-click="write('(')">(</button>
                 <button class="button col" ng-click="write(')')">)</button>
-                <button class="button col" ng-click="write('+')">+</button>
+                <button class="button col" ng-click="operation(1)">+</button>
             </div>
-
             <div class="row">
-                <button class="button col" ng-click="write('7')">7</button>
-                <button class="button col" ng-click="write('8')">8</button>
-                <button class="button col" ng-click="write('9')">9</button>
-                <button class="button col" ng-click="write('-')">-</button>
+                <button class="button col" ng-click="numbers(7)">7</button>
+                <button class="button col" ng-click="numbers(8)">8</button>
+                <button class="button col" ng-click="numbers(9)">9</button>
+                <button class="button col" ng-click="operation(2)">-</button>
             </div>
-
             <div class="row">
-                <button class="button col" ng-click="write('4')">4</button>
-                <button class="button col" ng-click="write('5')">5</button>
-                <button class="button col" ng-click="write('6')">6</button>
-                <button class="button col" ng-click="write('*')">&times;</button>
+                <button class="button col" ng-click="numbers(4)">4</button>
+                <button class="button col" ng-click="numbers(5)">5</button>
+                <button class="button col" ng-click="numbers(6)">6</button>
+                <button class="button col" ng-click="operation(3)">&times;</button>
             </div>
-
             <div class="row">
-                <button class="button col" ng-click="write('1')">1</button>
-                <button class="button col" ng-click="write('2')">2</button>
-                <button class="button col" ng-click="write('3')">3</button>
-                <button class="button col" ng-click="write('/')">&divide;</button>
+                <button class="button col" ng-click="numbers(1)">1</button>
+                <button class="button col" ng-click="numbers(2)">2</button>
+                <button class="button col" ng-click="numbers(3)">3</button>
+                <button class="button col" ng-click="operation(4)">&divide;</button>
             </div>
-
             <div class="row">
-                <button class="button col" ng-click="write('0')">0</button>
-                <button class="button col" ng-click="write('.')">.</button>
+                <button class="button col" ng-click="numbers(0)">0</button>
+                <button class="button col" ng-click="numbers('.')">.</button>
                 <button class="button col ion-backspace-outline"></button>
-                <button class="button col" ng-click="write('=')">=</button>
+                <button class="button col" ng-click="equals()">=</button>
             </div>
         </div>
     </ion-content>

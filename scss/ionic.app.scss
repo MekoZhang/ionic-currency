@@ -66,17 +66,24 @@ $item-default-border: #E8E8E8;
     .push-right-top {
       position: absolute;
       right: 10px;
-      top: 10px;
+      top: 2px;
       color: #8c8c8c;
       font-size: 13px;
       border-right: 1px solid transparent;
     }
-    .push-right-bottom {
+    .push-right-center {
       position: absolute;
       right: 10px;
-      bottom: 20px;
+      top: 24px;
       font-size: 21px;
       border-right: 1px solid transparent;
+    }
+    .push-right-bottom {
+      position: absolute;
+      color: #8c8c8c;
+      right: 10px;
+      bottom: 5px;
+      font-size: 12px;
     }
     .item-avatar.selected {
       .item-content {
@@ -90,7 +97,7 @@ $item-default-border: #E8E8E8;
         -webkit-animation: webkit-blink 1s infinite steps(1, start);
         -o-animation: o-blink 1s infinite steps(1, start);
       }
-      .push-right-bottom.activated {
+      .push-right-center.activated {
         animation: blink 1s infinite steps(1, start);
         -webkit-animation: webkit-blink 1s infinite steps(1, start);
         -o-animation: o-blink 1s infinite steps(1, start);

@@ -9847,16 +9847,22 @@ a.button {
     .main .display .push-right-top {
       position: absolute;
       right: 10px;
-      top: 10px;
+      top: 2px;
       color: #8c8c8c;
       font-size: 13px;
       border-right: 1px solid transparent; }
-    .main .display .push-right-bottom {
+    .main .display .push-right-center {
       position: absolute;
       right: 10px;
-      bottom: 20px;
+      top: 24px;
       font-size: 21px;
       border-right: 1px solid transparent; }
+    .main .display .push-right-bottom {
+      position: absolute;
+      color: #8c8c8c;
+      right: 10px;
+      bottom: 5px;
+      font-size: 12px; }
     .main .display .item-avatar.selected {
       background-color: #d9d9d9; }
       .main .display .item-avatar.selected .item-content {
@@ -9865,7 +9871,7 @@ a.button {
       animation: blink 1s infinite steps(1, start);
       -webkit-animation: webkit-blink 1s infinite steps(1, start);
       -o-animation: o-blink 1s infinite steps(1, start); }
-    .main .display .item.selected .push-right-bottom.activated {
+    .main .display .item.selected .push-right-center.activated {
       animation: blink 1s infinite steps(1, start);
       -webkit-animation: webkit-blink 1s infinite steps(1, start);
       -o-animation: o-blink 1s infinite steps(1, start); }

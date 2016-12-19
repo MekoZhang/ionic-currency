@@ -2,20 +2,52 @@ angular.module('starter.controllers', [])
 
     .controller('MainCtrl', function ($rootScope, $scope, $state, $http, $ionicListDelegate, $ionicPopup, currencyService) {
 
-        if (!$rootScope.hasInited) {
-            var url = "";
-            $http.get(url + "data/currency.json")
-                .then(function (response) {
-                    currencyService.init(response.data);
-                    $rootScope.hasInited = true;
-                    $scope.currencyList = currencyService.getUserCurrency()
-                })
-            ;
-        } else {
-            $scope.currencyList = currencyService.getUserCurrency();
-        }
+        $scope.currencyList = currencyService.getUserCurrency();
 
-        $scope.input = 213124124.22132;
+        $scope.$on('user-currency-changed', function () {
+            $scope.currencyList = currencyService.getUserCurrency();
+        });
+
+        $scope.showOperation = false;
+
+        $scope.display = 0;
+        var operator = 0;
+        var memory = [];
+        var operand = 0;
+        $scope.numbers = function (x) {
+            memory.push(x);
+            $scope.display = memory.join('') * 1;
+            $scope.updateSelectedValue();
+        };
+        $scope.operation = function (x) {
+            operand = $scope.display;
+            memory = [];
+            operator = x;
+        };
+        $scope.clear = function () {
+            $scope.display = 0;
+            operand = 0;
+            memory = [];
+            $scope.updateSelectedValue();
+        };
+        $scope.equals = function () {
+            if (operator === 1) {
+                $scope.display += operand;
+            } else if (operator === 2) {
+                $scope.display = operand - $scope.display;
+            } else if (operator === 3) {
+                $scope.display *= operand;
+            } else if (operator === 4) {
+                $scope.display = operand / $scope.display;
+            }
+            $scope.updateSelectedValue();
+        };
+
+
+        $scope.write = function (c) {
+            $scope.input = "" + $rootScope.$eval($scope.input + c);
+            $scope.updateSelectedValue();
+        };
 
         $scope.swap = function (item) {
             $state.go("swap", {index: item.index});
@@ -45,7 +77,21 @@ angular.module('starter.controllers', [])
                 i.selected = false;
             });
             item.selected = true;
+            $scope.updateSelectedValue();
         };
+
+        $scope.updateSelectedValue = function() {
+            var selectedItem;
+            angular.forEach($scope.currencyList, function (i) {
+                if (i.selected) {
+                    i.value = $scope.display;
+                    selectedItem = i;
+                }
+            });
+            angular.forEach($scope.currencyList, function (i) {
+                i.value = (i.rate / selectedItem.rate * selectedItem.value).toFixed(2);
+            });
+        }
     })
     .controller('SwapCtrl', function ($rootScope, $scope, $state, $stateParams,
                                       $timeout, $location, $ionicScrollDelegate, $ionicViewSwitcher, currencyService) {
@@ -55,11 +101,11 @@ angular.module('starter.controllers', [])
         $scope.hotCurrencyList = currencyService.getHotCurrency();
         var index = $stateParams.index;
 
-        $scope.onSwipeRight = function () {
-            $state.go("main");
-        };
         $scope.back = function () {
             $state.go("main");
+        };
+        $scope.onSwipeRight = function () {
+            $scope.back();
         };
         $scope.search = function () {
             $ionicViewSwitcher.nextDirection('enter');

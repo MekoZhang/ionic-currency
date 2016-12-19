@@ -24,10 +24,13 @@ angular.module('starter.services', [])
         }
     }])
 
-    .factory('currencyService', ['localStorageService', function (localStorageService) {
+    .factory('currencyService', ['$rootScope', 'localStorageService', function ($rootScope, localStorageService) {
         return {
-            init: function (currencyList) {
-                localStorageService.update("currency", currencyList);
+            init: function (currencyList, currencyRateList) {
+
+                if (!localStorageService.get("currency")) {
+                    localStorageService.update("currency", currencyList);
+                }
 
                 if (!localStorageService.get("userCurrency")) {
                     var defaultSymbols = ['CNY', 'CNH', 'USD', 'EUR', 'JPY'];
@@ -44,9 +47,32 @@ angular.module('starter.services', [])
                     });
                     localStorageService.update("userCurrency", defaultList);
                 }
+
+                if (!this.getCurrencyRate()) {
+                    this.updateCurrencyRate(currencyRateList);
+                }
+            },
+            updateCurrencyRate: function(currencyRateList) {
+                if (!!currencyRateList) {
+                    var currencyRateMap = {};
+                    angular.forEach(currencyRateList, function (currencyRate) {
+                        currencyRateMap[currencyRate.resource.fields.symbol.replace('=X', '')] = currencyRate.resource.fields.price;
+                    });
+                    localStorageService.update("currencyRate", currencyRateMap);
+                    $rootScope.$broadcast('user-currency-changed');
+                }
+            },
+            getCurrencyRate: function() {
+               return localStorageService.get("currencyRate");
             },
             getUserCurrency: function () {
-                return localStorageService.get("userCurrency");
+                var userCurrency = localStorageService.get("userCurrency") || [];
+                var currencyRate = this.getCurrencyRate();
+                angular.forEach(userCurrency, function (currency) {
+                    currency.rate = currencyRate[currency.symbol];
+                    currency.value = 0;
+                });
+                return userCurrency;
             },
             removeUserCurrency: function (index) {
                 var currencyList = localStorageService.get("userCurrency");

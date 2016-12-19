@@ -9,5 +9,11 @@
     "www/**/*",
     "!www/lib/**/*",
     "!www/**/*.map"
+  ],
+  "proxies": [
+    {
+      "path": "/symbols",
+      "proxyUrl": "http://finance.yahoo.com/webservice/v1/symbols"
+    }
   ]
 }

@@ -5,7 +5,23 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('starter', ['ionic', 'ui.router', 'starter.controllers', 'starter.services', 'starter.directives'])
 
-    .run(function ($ionicPlatform) {
+    .run(function ($ionicPlatform, $http, currencyService) {
+
+        $http.get("data/currency.json")
+            .then(function (currency) {
+                $http.get("data/currency_rate.json")
+                    .then(function (currencyRate) {
+                        currencyService.init(currency.data, currencyRate.data);
+                    });
+            })
+        ;
+
+        // var url = "";
+        var url = "https://finance.yahoo.com/webservice/v1";
+        $http.get(url + "/symbols/allcurrencies/quote?format=json")
+            .success(function (data) {
+                currencyService.updateCurrencyRate(data.list.resources);
+            });
 
         $ionicPlatform.ready(function () {
             if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -21,23 +37,6 @@ angular.module('starter', ['ionic', 'ui.router', 'starter.controllers', 'starter
             if (window.StatusBar) {
                 StatusBar.styleDefault();
             }
-
-            //判断网络状态
-            document.addEventListener("deviceready", function () {
-
-                // listen for Online event
-                $rootScope.$on('$cordovaNetwork:online', function (event, networkState) {
-                    console.log("device online...");
-                });
-
-                // listen for Offline event
-                $rootScope.$on('$cordovaNetwork:offline', function (event, networkState) {
-                    //提醒用户的网络异常
-                    $ionicLoading.show({
-                        template: '网络异常，不能连接到服务器！'
-                    });
-                });
-            }, false);
         });
     })
 
