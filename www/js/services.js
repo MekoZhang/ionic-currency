@@ -28,12 +28,73 @@ angular.module('starter.services', [])
         return {
             init: function (currencyList) {
                 localStorageService.update("currency", currencyList);
+
+                if (!localStorageService.get("userCurrency")) {
+                    var defaultSymbols = ['CNY', 'CNH', 'USD', 'EUR', 'JPY'];
+                    var defaultList = [];
+                    var i = 0;
+                    angular.forEach(currencyList, function (currency) {
+                        var symbol = currency['symbol'];
+                        if (defaultSymbols.indexOf(symbol) != -1) {
+                            defaultList.push(angular.extend(currency, {
+                                selected: i == 0,
+                                index: i++
+                            }));
+                        }
+                    });
+                    localStorageService.update("userCurrency", defaultList);
+                }
+            },
+            getUserCurrency: function () {
+                return localStorageService.get("userCurrency");
+            },
+            removeUserCurrency: function (index) {
+                var currencyList = localStorageService.get("userCurrency");
+                var userCurrency = [];
+                var i = 0;
+                angular.forEach(currencyList, function (currency) {
+                    if (currency.index !== index) {
+                        userCurrency.push(angular.extend(currency, {
+                            index: i++
+                        }));
+                    }
+                });
+                localStorageService.update("userCurrency", userCurrency);
+            },
+            updateUserCurrency: function (index, currency) {
+                var currencyList = localStorageService.get("userCurrency");
+                if (currencyList.length <= index) {
+                    currencyList.push(angular.extend(currency, {
+                        index: currencyList.length,
+                        selected: false
+                    }));
+                } else {
+                    angular.forEach(currencyList, function (c) {
+                        if (c.index === index) {
+                            currencyList[index] = angular.extend(currency, {
+                                index: index,
+                                selected: c.selected
+                            });
+                        }
+                    });
+                }
+                localStorageService.update("userCurrency", currencyList);
             },
             getAllCurrency: function () {
-                return localStorageService.get("currency");
+                var userCurrencySymbols = [];
+                angular.forEach(this.getUserCurrency(), function (userCurrency) {
+                    userCurrencySymbols.push(userCurrency.symbol);
+                });
+                var allCurrency = localStorageService.get("currency");
+                angular.forEach(allCurrency, function (currency) {
+                    if (userCurrencySymbols.indexOf(currency['symbol']) != -1) {
+                        currency.hasSelected = true;
+                    }
+                });
+                return allCurrency;
             },
             getGroupCurrency: function () {
-                var currencyList = localStorageService.get("currency");
+                var currencyList = this.getAllCurrency();
 
                 var groupMap = {};
                 angular.forEach(currencyList, function (currency) {
@@ -54,7 +115,7 @@ angular.module('starter.services', [])
                 return sortObject(groupMap);
             },
             getHotCurrency: function () {
-                var currencyList = localStorageService.get("currency");
+                var currencyList = this.getAllCurrency();
                 var hotSymbols = ['CNY', 'CNH', 'USD', 'EUR', 'JPY'];
 
                 var hotList = [];

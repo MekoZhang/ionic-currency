@@ -5,13 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('starter', ['ionic', 'ui.router', 'starter.controllers', 'starter.services', 'starter.directives'])
 
-    .run(function ($ionicPlatform, $http, currencyService) {
-
-        var url = "";
-
-        $http.get(url + "data/currency.json").then(function(response) {
-            currencyService.init(response.data);
-        });
+    .run(function ($ionicPlatform) {
 
         $ionicPlatform.ready(function () {
             if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -56,16 +50,21 @@ angular.module('starter', ['ionic', 'ui.router', 'starter.controllers', 'starter
         $stateProvider
             .state('main', {
                 url: "/main",
+                cache: false,
                 templateUrl: "templates/main.html",
                 controller: "MainCtrl"
             })
             .state('swap', {
                 url: "/swap",
+                params: {index: 0},
+                cache: false,
                 templateUrl: "templates/swap.html",
                 controller: "SwapCtrl"
             })
             .state('search', {
                 url: "/search",
+                params: {index: 0},
+                cache: false,
                 templateUrl: "templates/search.html",
                 controller: "SearchCtrl"
             })

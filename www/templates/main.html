@@ -6,11 +6,10 @@
         <ion-scroll class="display">
             <ion-refresher pulling-text="下拉添加" pulling-icon="ion-ios-infinite" on-refresh="doAdd()"></ion-refresher>
             <ion-list>
-                <ion-item ng-repeat="item in items" class="item-avatar" ng-class="item.selected?'selected':''"
+                <ion-item ng-repeat="item in currencyList" class="item-avatar" ng-class="item.selected?'selected':''"
                           ng-click="selectItem(item)">
-                    <img ng-src="img/currency/{{item.id}}.png">
-                    <h2 ng-bind="item.id"></h2>
-                    <p ng-bind="item.name + ' ' + item.symbol"></p>
+                    <img ng-src="img/currency/{{item.symbol}}.png">
+                    <h2 ng-bind="item.symbol"></h2>
                     <span class="push-right-top" ng-bind="input"></span>
                     <span class="push-right-bottom activated" ng-bind="input"></span>
                     <ion-option-button class="button-assertive ion-ios-trash"

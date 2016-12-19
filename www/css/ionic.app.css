@@ -9839,9 +9839,11 @@ a.button {
   .main .display {
     flex: 1; }
     .main .display .item-avatar img {
-      -webkit-border-radius: 0;
-      -moz-border-radius: 0;
-      border-radius: 0; }
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px; }
+    .main .display .item-avatar h2 {
+      margin: 10px 0 0 0; }
     .main .display .push-right-top {
       position: absolute;
       right: 10px;
@@ -9908,6 +9910,12 @@ a.button {
       left: 36px;
       height: 32px;
       line-height: 32px; }
+    .ec-list .list .ec-item span {
+      position: absolute;
+      right: 10px;
+      top: 15px;
+      color: #8c8c8c;
+      font-size: 13px; }
 
 .currency-item {
   padding: 0 !important; }

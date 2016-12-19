@@ -16,6 +16,7 @@
                     <img ng-src="img/currency/{{item.symbol}}.png">
                 </div>
                 <h2 ng-bind="item['currency_name_zh-Hans'] + ' ' + item.symbol"></h2>
+                <span ng-if="item.hasSelected">已选择</span>
             </ion-item>
         </ion-list>
     </ion-content>
