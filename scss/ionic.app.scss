@@ -163,6 +163,9 @@ $item-default-border: #E8E8E8;
 .currency-pic img {
   width: 36px;
   height: 36px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
 }
 
 .currency-index-bar {
