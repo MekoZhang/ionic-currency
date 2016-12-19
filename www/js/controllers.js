@@ -44,11 +44,6 @@ angular.module('starter.controllers', [])
         };
 
 
-        $scope.write = function (c) {
-            $scope.input = "" + $rootScope.$eval($scope.input + c);
-            $scope.updateSelectedValue();
-        };
-
         $scope.swap = function (item) {
             $state.go("swap", {index: item.index});
             $ionicListDelegate.closeOptionButtons();
@@ -77,7 +72,6 @@ angular.module('starter.controllers', [])
                 i.selected = false;
             });
             item.selected = true;
-            $scope.updateSelectedValue();
         };
 
         $scope.updateSelectedValue = function() {

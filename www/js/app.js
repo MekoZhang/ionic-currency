@@ -16,8 +16,8 @@ angular.module('starter', ['ionic', 'ui.router', 'starter.controllers', 'starter
             })
         ;
 
-        // var url = "";
-        var url = "https://finance.yahoo.com/webservice/v1";
+        var url = "";
+        // var url = "https://finance.yahoo.com/webservice/v1";
         $http.get(url + "/symbols/allcurrencies/quote?format=json")
             .success(function (data) {
                 currencyService.updateCurrencyRate(data.list.resources);
@@ -38,6 +38,10 @@ angular.module('starter', ['ionic', 'ui.router', 'starter.controllers', 'starter
                 StatusBar.styleDefault();
             }
         });
+    })
+
+    .config(function($ionicConfigProvider) {
+        $ionicConfigProvider.views.swipeBackEnabled(false);
     })
 
     .config(function ($stateProvider, $urlRouterProvider) {

@@ -33,7 +33,7 @@ angular.module('starter.services', [])
                 }
 
                 if (!localStorageService.get("userCurrency")) {
-                    var defaultSymbols = ['CNY', 'CNH', 'USD', 'EUR', 'JPY'];
+                    var defaultSymbols = ['CNY', 'CNH', 'USD', 'EUR', 'GBP', 'JPY'];
                     var defaultList = [];
                     var i = 0;
                     angular.forEach(currencyList, function (currency) {
@@ -52,7 +52,7 @@ angular.module('starter.services', [])
                     this.updateCurrencyRate(currencyRateList);
                 }
             },
-            updateCurrencyRate: function(currencyRateList) {
+            updateCurrencyRate: function (currencyRateList) {
                 if (!!currencyRateList) {
                     var currencyRateMap = {};
                     angular.forEach(currencyRateList, function (currencyRate) {
@@ -62,8 +62,8 @@ angular.module('starter.services', [])
                     $rootScope.$broadcast('user-currency-changed');
                 }
             },
-            getCurrencyRate: function() {
-               return localStorageService.get("currencyRate");
+            getCurrencyRate: function () {
+                return localStorageService.get("currencyRate");
             },
             getUserCurrency: function () {
                 var userCurrency = localStorageService.get("userCurrency") || [];
@@ -142,7 +142,7 @@ angular.module('starter.services', [])
             },
             getHotCurrency: function () {
                 var currencyList = this.getAllCurrency();
-                var hotSymbols = ['CNY', 'CNH', 'USD', 'EUR', 'JPY'];
+                var hotSymbols = ['CNY', 'CNH', 'USD', 'EUR', 'GBP', 'JPY'];
 
                 var hotList = [];
                 angular.forEach(currencyList, function (currency) {
